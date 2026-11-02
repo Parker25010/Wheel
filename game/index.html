@@ -105,22 +105,6 @@ make<!DOCTYPE html>
     box-shadow: 0 0 12px rgba(255,95,63,0.5);
   }
 
-  /* empty state on canvas */
-  .empty-msg {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.3rem;
-    letter-spacing: 0.06em;
-    color: var(--muted);
-    text-align: center;
-    padding: 24px;
-    pointer-events: none;
-  }
-
   .spin-btn {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 1.5rem;
@@ -281,7 +265,6 @@ make<!DOCTYPE html>
       <div class="pointer"></div>
       <canvas id="wheel" width="360" height="360"></canvas>
       <div class="hub"></div>
-      <div class="empty-msg" id="emptyMsg">Add options<br>to start</div>
     </div>
     <button class="spin-btn" id="spinBtn" disabled>SPIN</button>
   </div>
@@ -343,7 +326,6 @@ const optionsArea = document.getElementById('optionsArea');
 const errorMsg = document.getElementById('errorMsg');
 const tagList = document.getElementById('tagList');
 const tagsLabel = document.getElementById('tagsLabel');
-const emptyMsg = document.getElementById('emptyMsg');
 const modalOverlay = document.getElementById('modalOverlay');
 const modalWinner = document.getElementById('modalWinner');
 const spinAgainBtn = document.getElementById('spinAgainBtn');
@@ -371,9 +353,8 @@ function drawWheel(angle = 0, isSpinning = false) {
   const cx = size / 2, cy = size / 2, r = size / 2 - 2;
   ctx.clearRect(0, 0, size, size);
 
-  if (!options.length) { emptyMsg.style.display = 'flex'; return; }
-  emptyMsg.style.display = 'none';
-
+  if (!options.length) return;
+  
   const arc = (2 * Math.PI) / options.length;
 
   options.forEach((opt, i) => {
