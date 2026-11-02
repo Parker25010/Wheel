@@ -273,7 +273,7 @@ make<!DOCTYPE html>
   <div class="input-side">
     <div>
       <label class="section-label">Options (one per line)</label>
-      <textarea id="optionsArea" placeholder="Pizza&#10;Sushi&#10;Tacos&#10;Burgers&#10;Ramen"></textarea>
+      <textarea id="optionsArea" placeholder="Pizza&#10;Tacos&#10;Burgers"></textarea>
       <div class="error-msg" id="errorMsg"></div>
     </div>
     <div class="btn-row">
@@ -521,18 +521,6 @@ function updateDynamicData() {
     // Randomly shuffle options to simulate dynamic data
     const shuffled = [...options].sort(() => Math.random() - 0.5);
     options = shuffled;
-    
-    // Occasionally add/remove options to simulate real dynamic data
-    if (Math.random() > 0.7 && options.length > 2) {
-      // Remove a random option
-      const removeIndex = Math.floor(Math.random() * options.length);
-      options.splice(removeIndex, 1);
-    } else if (Math.random() > 0.7 && options.length < 10) {
-      // Add a random new option
-      const newOptions = ['Bonus Prize', 'Mystery Box', 'Jackpot', 'Free Spin', 'Double Points'];
-      const randomOption = newOptions[Math.floor(Math.random() * newOptions.length)];
-      options.push(randomOption);
-    }
     
     // Update textarea to reflect changes
     optionsArea.value = options.join('\n');
